@@ -1,0 +1,15 @@
+Source: ogre-next
+Version: 2022-02-28-1
+Build-Depends: zlib, freeimage, freetype, rapidjson, openvr, boost-thread, boost-date-time, poco, tbb, sdl2, tinyxml, zziplib, vulkan, vulkan-headers, shaderc
+Homepage: https://github.com/OGRECave/ogre-next
+Description: Ogre 2.3 - scene-oriented, flexible 3D engine written in C++
+
+Feature: csharp
+Description: Build csharp bindings
+
+Feature: java
+Description: Build Java (JNI) bindings
+
+Feature: python
+Description: Build Python bindings
+Build-Depends: python3

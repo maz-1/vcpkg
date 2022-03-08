@@ -1,8 +1,8 @@
 {
   "name": "ogre-next",
-  "version-string": "2019-10-20",
-  "port-version": 2,
-  "description": "Ogre 2.1 & 2.2 - scene-oriented, flexible 3D engine written in C++",
+  "version-string": "2022-03-02",
+  "port-version": 0,
+  "description": "Ogre 2.3 - scene-oriented, flexible 3D engine written in C++",
   "homepage": "https://github.com/OGRECave/ogre-next",
   "dependencies": [
     "boost-date-time",
@@ -16,14 +16,14 @@
     "tbb",
     "tinyxml",
     "zlib",
-    "zziplib"
+    "zziplib",
+    "vulkan",
+    "vulkan-headers",
+    "shaderc"
   ],
   "features": {
     "csharp": {
       "description": "Build csharp bindings"
-    },
-    "d3d9": {
-      "description": "Build Direct3D9 RenderSystem"
     },
     "java": {
       "description": "Build Java (JNI) bindings"

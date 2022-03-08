@@ -1,7 +1,6 @@
-diff --git a/CMake/CMakeLists.txt b/CMake/CMakeLists.txt
-index a7a3796..2e21403 100644
---- a/CMake/CMakeLists.txt
-+++ b/CMake/CMakeLists.txt
+diff --color -Naur '--exclude=*.orig' '--exclude=*.rej' a/CMake/CMakeLists.txt b/CMake/CMakeLists.txt
+--- a/CMake/CMakeLists.txt	2022-02-28 07:18:04.000000000 +0800
++++ b/CMake/CMakeLists.txt	2022-02-28 22:15:24.397410100 +0800
 @@ -13,10 +13,12 @@
  # directory, but can also be used for custom projects.
  #############################################################
@@ -18,46 +17,11 @@ index a7a3796..2e21403 100644
 +  endif()
  endif()
  
- set(INST_FILES Utils/FindPkgMacros.cmake) 
-diff --git a/CMake/InstallResources.cmake b/CMake/InstallResources.cmake
-index 783755e..79f7514 100644
---- a/CMake/InstallResources.cmake
-+++ b/CMake/InstallResources.cmake
-@@ -208,10 +208,12 @@ endif ()
- # Create the CMake package files
- include(CMakePackageConfigHelpers)
- 
--if(WIN32 OR APPLE)
--  set(OGRE_CMAKE_DIR "CMake")
--else()
--  set(OGRE_CMAKE_DIR "${OGRE_LIB_DIRECTORY}/OGRE/cmake")
-+if(NOT DEFINED OGRE_CMAKE_DIR)
-+  if(WIN32 OR APPLE)
-+    set(OGRE_CMAKE_DIR "CMake")
-+  else()
-+    set(OGRE_CMAKE_DIR "${OGRE_LIB_DIRECTORY}/OGRE/cmake")
-+  endif()
- endif()
- configure_package_config_file(${OGRE_TEMPLATES_DIR}/OGREConfig.cmake.in ${PROJECT_BINARY_DIR}/cmake/OGREConfig.cmake
-     INSTALL_DESTINATION ${OGRE_CMAKE_DIR}
-diff --git a/CMake/Packages/FindCg.cmake b/CMake/Packages/FindCg.cmake
-index 4501cf9..7eb57c3 100644
---- a/CMake/Packages/FindCg.cmake
-+++ b/CMake/Packages/FindCg.cmake
-@@ -56,7 +56,7 @@ endif()
- 
- find_library(Cg_LIBRARY_REL NAMES ${Cg_LIBRARY_NAMES} HINTS ${Cg_LIB_SEARCH_PATH} ${Cg_PKGC_LIBRARY_DIRS} PATH_SUFFIXES "" Release RelWithDebInfo MinSizeRel)
- find_library(Cg_LIBRARY_DBG NAMES ${Cg_LIBRARY_NAMES_DBG} HINTS ${Cg_LIB_SEARCH_PATH} ${Cg_PKGC_LIBRARY_DIRS} PATH_SUFFIXES "" Debug)
--make_library_set(Cg_LIBRARY)
-+make_library_set(Cg)
- 
- if (WIN32)
- 	if (CMAKE_CL_64)
-diff --git a/CMake/Packages/FindFreeImage.cmake b/CMake/Packages/FindFreeImage.cmake
-index 7c89ec5..d8314f0 100644
---- a/CMake/Packages/FindFreeImage.cmake
-+++ b/CMake/Packages/FindFreeImage.cmake
-@@ -43,7 +43,7 @@ find_path(FreeImage_INCLUDE_DIR NAMES FreeImage.h HINTS ${FreeImage_INC_SEARCH_P
+ set(INST_FILES
+diff --color -Naur '--exclude=*.orig' '--exclude=*.rej' a/CMake/Packages/FindFreeImage.cmake b/CMake/Packages/FindFreeImage.cmake
+--- a/CMake/Packages/FindFreeImage.cmake	2022-02-28 07:18:04.000000000 +0800
++++ b/CMake/Packages/FindFreeImage.cmake	2022-02-28 22:15:24.410409900 +0800
+@@ -43,7 +43,7 @@
  find_library(FreeImage_LIBRARY_REL NAMES ${FreeImage_LIBRARY_NAMES} HINTS ${FreeImage_LIB_SEARCH_PATH} ${FreeImage_PKGC_LIBRARY_DIRS} PATH_SUFFIXES "" Release RelWithDebInfo MinSizeRel)
  find_library(FreeImage_LIBRARY_DBG NAMES ${FreeImage_LIBRARY_NAMES_DBG} HINTS ${FreeImage_LIB_SEARCH_PATH} ${FreeImage_PKGC_LIBRARY_DIRS} PATH_SUFFIXES "" Debug)
  
@@ -66,11 +30,22 @@ index 7c89ec5..d8314f0 100644
  
  findpkg_finish(FreeImage)
  
-diff --git a/CMake/Packages/FindGLSLOptimizer.cmake b/CMake/Packages/FindGLSLOptimizer.cmake
-index dd4b179..6f158fc 100644
---- a/CMake/Packages/FindGLSLOptimizer.cmake
-+++ b/CMake/Packages/FindGLSLOptimizer.cmake
-@@ -38,7 +38,7 @@ findpkg_framework(GLSL_Optimizer)
+diff --color -Naur '--exclude=*.orig' '--exclude=*.rej' a/CMake/Packages/FindFreetype.cmake b/CMake/Packages/FindFreetype.cmake
+--- a/CMake/Packages/FindFreetype.cmake	2022-02-28 07:18:04.000000000 +0800
++++ b/CMake/Packages/FindFreetype.cmake	2022-02-28 22:15:24.559409900 +0800
+@@ -49,7 +49,7 @@
+ find_library(FREETYPE_LIBRARY_REL NAMES ${FREETYPE_LIBRARY_NAMES} HINTS ${FREETYPE_LIB_SEARCH_PATH} ${FREETYPE_PKGC_LIBRARY_DIRS} PATH_SUFFIXES "" Release RelWithDebInfo MinSizeRel)
+ find_library(FREETYPE_LIBRARY_DBG NAMES ${FREETYPE_LIBRARY_NAMES_DBG} HINTS ${FREETYPE_LIB_SEARCH_PATH} ${FREETYPE_PKGC_LIBRARY_DIRS} PATH_SUFFIXES "" Debug)
+ 
+-make_library_set(FREETYPE_LIBRARY)
++make_library_set(FREETYPE)
+ 
+ findpkg_finish(FREETYPE)
+ mark_as_advanced(FREETYPE_FT2BUILD_INCLUDE_DIR)
+diff --color -Naur '--exclude=*.orig' '--exclude=*.rej' a/CMake/Packages/FindGLSLOptimizer.cmake b/CMake/Packages/FindGLSLOptimizer.cmake
+--- a/CMake/Packages/FindGLSLOptimizer.cmake	2022-02-28 07:18:04.000000000 +0800
++++ b/CMake/Packages/FindGLSLOptimizer.cmake	2022-02-28 22:15:24.418409400 +0800
+@@ -38,7 +38,7 @@
  find_path(GLSL_Optimizer_INCLUDE_DIR NAMES glsl_optimizer.h HINTS ${GLSL_Optimizer_INC_SEARCH_PATH} ${GLSL_Optimizer_PKGC_INCLUDE_DIRS} PATH_SUFFIXES GLSL_Optimizer)
  find_library(GLSL_Optimizer_LIBRARY_REL NAMES ${GLSL_Optimizer_LIBRARY_NAMES} HINTS ${GLSL_Optimizer_LIB_SEARCH_PATH} ${GLSL_Optimizer_PKGC_LIBRARY_DIRS} PATH_SUFFIXES "" Release RelWithDebInfo MinSizeRel)
  find_library(GLSL_Optimizer_LIBRARY_DBG NAMES ${GLSL_Optimizer_LIBRARY_NAMES_DBG} HINTS ${GLSL_Optimizer_LIB_SEARCH_PATH} ${GLSL_Optimizer_PKGC_LIBRARY_DIRS} PATH_SUFFIXES "" Debug)
@@ -79,11 +54,10 @@ index dd4b179..6f158fc 100644
  
  findpkg_finish(GLSL_Optimizer)
  add_parent_dir(GLSL_Optimizer_INCLUDE_DIRS GLSL_Optimizer_INCLUDE_DIR)
-diff --git a/CMake/Packages/FindHLSL2GLSL.cmake b/CMake/Packages/FindHLSL2GLSL.cmake
-index 7125895..13a306f 100644
---- a/CMake/Packages/FindHLSL2GLSL.cmake
-+++ b/CMake/Packages/FindHLSL2GLSL.cmake
-@@ -38,7 +38,7 @@ findpkg_framework(HLSL2GLSL)
+diff --color -Naur '--exclude=*.orig' '--exclude=*.rej' a/CMake/Packages/FindHLSL2GLSL.cmake b/CMake/Packages/FindHLSL2GLSL.cmake
+--- a/CMake/Packages/FindHLSL2GLSL.cmake	2022-02-28 07:18:04.000000000 +0800
++++ b/CMake/Packages/FindHLSL2GLSL.cmake	2022-02-28 22:15:24.429411600 +0800
+@@ -38,7 +38,7 @@
  find_path(HLSL2GLSL_INCLUDE_DIR NAMES hlsl2glsl.h HINTS ${HLSL2GLSL_INC_SEARCH_PATH} ${HLSL2GLSL_PKGC_INCLUDE_DIRS} PATH_SUFFIXES HLSL2GLSL)
  find_library(HLSL2GLSL_LIBRARY_REL NAMES ${HLSL2GLSL_LIBRARY_NAMES} HINTS ${HLSL2GLSL_LIB_SEARCH_PATH} ${HLSL2GLSL_PKGC_LIBRARY_DIRS} PATH_SUFFIXES "" Release RelWithDebInfo MinSizeRel)
  find_library(HLSL2GLSL_LIBRARY_DBG NAMES ${HLSL2GLSL_LIBRARY_NAMES_DBG} HINTS ${HLSL2GLSL_LIB_SEARCH_PATH} ${HLSL2GLSL_PKGC_LIBRARY_DIRS} PATH_SUFFIXES "" Debug)
@@ -92,11 +66,10 @@ index 7125895..13a306f 100644
  
  findpkg_finish(HLSL2GLSL)
  add_parent_dir(HLSL2GLSL_INCLUDE_DIRS HLSL2GLSL_INCLUDE_DIR)
-diff --git a/CMake/Packages/FindNVAPI.cmake b/CMake/Packages/FindNVAPI.cmake
-index 2b9deba..f33a298 100644
---- a/CMake/Packages/FindNVAPI.cmake
-+++ b/CMake/Packages/FindNVAPI.cmake
-@@ -44,7 +44,7 @@ findpkg_framework(NVAPI)
+diff --color -Naur '--exclude=*.orig' '--exclude=*.rej' a/CMake/Packages/FindNVAPI.cmake b/CMake/Packages/FindNVAPI.cmake
+--- a/CMake/Packages/FindNVAPI.cmake	2022-02-28 07:18:04.000000000 +0800
++++ b/CMake/Packages/FindNVAPI.cmake	2022-02-28 22:16:17.917013300 +0800
+@@ -44,7 +44,7 @@
  find_path(NVAPI_INCLUDE_DIR NAMES nvapi.h HINTS ${NVAPI_FRAMEWORK_INCLUDES} ${NVAPI_INC_SEARCH_PATH} ${NVAPI_PKGC_INCLUDE_DIRS} PATH_SUFFIXES NVAPI)
  find_library(NVAPI_LIBRARY_REL NAMES ${NVAPI_LIBRARY_NAMES} HINTS ${NVAPI_LIB_SEARCH_PATH} ${NVAPI_PKGC_LIBRARY_DIRS} PATH_SUFFIXES "" release relwithdebinfo minsizerel)
  find_library(NVAPI_LIBRARY_DBG NAMES ${NVAPI_LIBRARY_NAMES_DBG} HINTS ${NVAPI_LIB_SEARCH_PATH} ${NVAPI_PKGC_LIBRARY_DIRS} PATH_SUFFIXES "" debug)
@@ -106,11 +79,80 @@ index 2b9deba..f33a298 100644
  findpkg_finish(NVAPI)
  add_parent_dir(NVAPI_INCLUDE_DIRS NVAPI_INCLUDE_DIR)
 \ No newline at end of file
-diff --git a/CMake/Packages/FindPOCO.cmake b/CMake/Packages/FindPOCO.cmake
-index 6b6d7fa..3667b8b 100644
---- a/CMake/Packages/FindPOCO.cmake
-+++ b/CMake/Packages/FindPOCO.cmake
-@@ -50,7 +50,7 @@ findpkg_framework(POCO)
+diff --color -Naur '--exclude=*.orig' '--exclude=*.rej' a/CMake/Packages/FindOGRE.cmake b/CMake/Packages/FindOGRE.cmake
+--- a/CMake/Packages/FindOGRE.cmake	2022-02-28 07:18:04.000000000 +0800
++++ b/CMake/Packages/FindOGRE.cmake	2022-02-28 22:15:24.598409500 +0800
+@@ -229,10 +229,19 @@
+   set(OGRE_INCOMPATIBLE FALSE)
+ endif ()
+ 
++set(OGRE_LIB_SEARCH_PATH_DBG ${OGRE_LIB_SEARCH_PATH})
++set(OGRE_BIN_SEARCH_PATH_DBG ${OGRE_BIN_SEARCH_PATH})
++if (DEFINED VCPKG_INSTALLED_DIR AND DEFINED VCPKG_TARGET_TRIPLET)
++    set(OGRE_LIB_SEARCH_PATH ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/lib ${OGRE_LIB_SEARCH_PATH})
++    set(OGRE_BIN_SEARCH_PATH ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/bin ${OGRE_BIN_SEARCH_PATH})
++    set(OGRE_LIB_SEARCH_PATH_DBG ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/debug/lib ${OGRE_LIB_SEARCH_PATH_DBG})
++    set(OGRE_BIN_SEARCH_PATH_DBG ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/debug/bin ${OGRE_BIN_SEARCH_PATH_DBG})
++endif()
++
+ find_library(OGRE_LIBRARY_REL NAMES ${OGRE_LIBRARY_NAMES} HINTS ${OGRE_LIB_SEARCH_PATH} ${OGRE_PKGC_LIBRARY_DIRS} ${OGRE_FRAMEWORK_SEARCH_PATH} PATH_SUFFIXES "" "Release" "RelWithDebInfo" "MinSizeRel")
+-find_library(OGRE_LIBRARY_DBG NAMES ${OGRE_LIBRARY_NAMES_DBG} HINTS ${OGRE_LIB_SEARCH_PATH} ${OGRE_PKGC_LIBRARY_DIRS} ${OGRE_FRAMEWORK_SEARCH_PATH} PATH_SUFFIXES "" "Debug")
++find_library(OGRE_LIBRARY_DBG NAMES ${OGRE_LIBRARY_NAMES_DBG} HINTS ${OGRE_LIB_SEARCH_PATH_DBG} ${OGRE_PKGC_LIBRARY_DIRS} ${OGRE_FRAMEWORK_SEARCH_PATH} PATH_SUFFIXES "" "Debug")
+ 
+-make_library_set(OGRE_LIBRARY)
++make_library_set(OGRE)
+ 
+ if (OGRE_INCOMPATIBLE)
+   set(OGRE_LIBRARY "NOTFOUND")
+@@ -363,7 +372,7 @@
+ 	if (WIN32)
+ 		find_file(OGRE_BINARY_REL NAMES "OgreMain.dll" HINTS ${OGRE_BIN_SEARCH_PATH}
+           PATH_SUFFIXES "" Release RelWithDebInfo MinSizeRel)
+-		find_file(OGRE_BINARY_DBG NAMES "OgreMain_d.dll" HINTS ${OGRE_BIN_SEARCH_PATH}
++		find_file(OGRE_BINARY_DBG NAMES "OgreMain_d.dll" HINTS ${OGRE_BIN_SEARCH_PATH_DBG}
+           PATH_SUFFIXES "" Debug )
+ 	endif()
+ 	mark_as_advanced(OGRE_BINARY_REL OGRE_BINARY_DBG)
+@@ -382,7 +391,7 @@
+ set(OGRE_COMPONENT_SEARCH_PATH_DBG
+   ${OGRE_LIBRARY_DIR_DBG}/..
+   ${OGRE_LIBRARY_DIR_DBG}/../..
+-  ${OGRE_BIN_SEARCH_PATH}
++  ${OGRE_BIN_SEARCH_PATH_DBG}
+ )
+ 
+ macro(ogre_find_component COMPONENT HEADER PATH_HINTS)
+@@ -393,7 +402,7 @@
+   get_debug_names(OGRE_${COMPONENT}_LIBRARY_NAMES)
+   find_library(OGRE_${COMPONENT}_LIBRARY_REL NAMES ${OGRE_${COMPONENT}_LIBRARY_NAMES} HINTS ${OGRE_LIBRARY_DIR_REL} ${OGRE_FRAMEWORK_PATH} PATH_SUFFIXES "" "Release" "RelWithDebInfo" "MinSizeRel")
+   find_library(OGRE_${COMPONENT}_LIBRARY_DBG NAMES ${OGRE_${COMPONENT}_LIBRARY_NAMES_DBG} HINTS ${OGRE_LIBRARY_DIR_DBG} ${OGRE_FRAMEWORK_PATH} PATH_SUFFIXES "" "Debug")
+-  make_library_set(OGRE_${COMPONENT}_LIBRARY)
++  make_library_set(OGRE_${COMPONENT})
+   findpkg_finish(OGRE_${COMPONENT})
+   if (OGRE_${COMPONENT}_FOUND)
+     # find binaries
+@@ -458,7 +467,7 @@
+     HINTS "${OGRE_BUILD}/lib" ${OGRE_LIBRARY_DIRS} ${OGRE_FRAMEWORK_PATH} PATH_SUFFIXES "" OGRE OGRE-${OGRE_VERSION} opt Release Release/opt RelWithDebInfo RelWithDebInfo/opt MinSizeRel MinSizeRel/opt)
+   find_library(OGRE_${PLUGIN}_LIBRARY_DBG NAMES ${OGRE_${PLUGIN}_LIBRARY_NAMES_DBG}
+     HINTS "${OGRE_BUILD}/lib" ${OGRE_LIBRARY_DIRS} ${OGRE_FRAMEWORK_PATH} PATH_SUFFIXES "" OGRE OGRE-${OGRE_VERSION} opt Debug Debug/opt)
+-  make_library_set(OGRE_${PLUGIN}_LIBRARY)
++  make_library_set(OGRE_${PLUGIN})
+ 
+   if (OGRE_${PLUGIN}_LIBRARY OR OGRE_${PLUGIN}_INCLUDE_DIR)
+     set(OGRE_${PLUGIN}_FOUND TRUE)
+@@ -482,7 +491,7 @@
+         set(OGRE_PLUGIN_SEARCH_PATH_DBG
+           ${OGRE_LIBRARY_DIR_DBG}/..
+           ${OGRE_LIBRARY_DIR_DBG}/../..
+-		  ${OGRE_BIN_SEARCH_PATH}
++		  ${OGRE_BIN_SEARCH_PATH_DBG}
+         )
+         find_path(OGRE_PLUGIN_DIR_REL NAMES "${PLUGIN}.dll" HINTS ${OGRE_PLUGIN_SEARCH_PATH_REL}
+           PATH_SUFFIXES "" bin bin/Release bin/RelWithDebInfo bin/MinSizeRel Release)
+diff --color -Naur '--exclude=*.orig' '--exclude=*.rej' a/CMake/Packages/FindPOCO.cmake b/CMake/Packages/FindPOCO.cmake
+--- a/CMake/Packages/FindPOCO.cmake	2022-02-28 07:18:04.000000000 +0800
++++ b/CMake/Packages/FindPOCO.cmake	2022-02-28 22:15:24.458409400 +0800
+@@ -50,7 +50,7 @@
  find_path(POCO_INCLUDE_DIR NAMES Poco/Foundation.h HINTS ${POCO_INC_SEARCH_PATH} ${POCO_PKGC_INCLUDE_DIRS} PATH_SUFFIXES Foundation/include)
  find_library(POCO_LIBRARY_REL NAMES ${POCO_LIBRARY_NAMES} HINTS ${POCO_LIB_SEARCH_PATH} ${POCO_PKGC_LIBRARY_DIRS} PATH_SUFFIXES Linux/i686)
  find_library(POCO_LIBRARY_DBG NAMES ${POCO_LIBRARY_NAMES_DBG} HINTS ${POCO_LIB_SEARCH_PATH} ${POCO_PKGC_LIBRARY_DIRS} PATH_SUFFIXES Linux/i686)
@@ -119,7 +161,7 @@ index 6b6d7fa..3667b8b 100644
  
  findpkg_finish(POCO)
  
-@@ -66,7 +66,7 @@ get_debug_names(POCO_Util_LIBRARY_NAMES)
+@@ -66,7 +66,7 @@
  find_path(POCO_Util_INCLUDE_DIR NAMES Poco/Util/Util.h HINTS ${POCO_INCLUDE_DIR} ${POCO_INC_SEARCH_PATH} ${POCO_PKGC_INCLUDE_DIRS} PATH_SUFFIXES Util/include)
  find_library(POCO_Util_LIBRARY_REL NAMES ${POCO_Util_LIBRARY_NAMES} HINTS ${POCO_LIB_SEARCH_PATH} ${POCO_PKGC_LIBRARY_DIRS} PATH_SUFFIXES Linux/i686)
  find_library(POCO_Util_LIBRARY_DBG NAMES ${POCO_Util_LIBRARY_NAMES_DBG} HINTS ${POCO_LIB_SEARCH_PATH} ${POCO_PKGC_LIBRARY_DIRS} PATH_SUFFIXES Linux/i686)
@@ -128,7 +170,7 @@ index 6b6d7fa..3667b8b 100644
  findpkg_finish(POCO_Util)
  
  # Look for Poco's Net package
-@@ -76,7 +76,7 @@ get_debug_names(POCO_Net_LIBRARY_NAMES)
+@@ -76,7 +76,7 @@
  find_path(POCO_Net_INCLUDE_DIR NAMES Poco/Net/Net.h HINTS ${POCO_INCLUDE_DIR} ${POCO_INC_SEARCH_PATH} ${POCO_PKGC_INCLUDE_DIRS} PATH_SUFFIXES Net/include)
  find_library(POCO_Net_LIBRARY_REL NAMES ${POCO_Net_LIBRARY_NAMES} HINTS ${POCO_LIB_SEARCH_PATH} ${POCO_PKGC_LIBRARY_DIRS} PATH_SUFFIXES Linux/i686)
  find_library(POCO_Net_LIBRARY_DBG NAMES ${POCO_Net_LIBRARY_NAMES_DBG} HINTS ${POCO_LIB_SEARCH_PATH} ${POCO_PKGC_LIBRARY_DIRS} PATH_SUFFIXES Linux/i686)
@@ -137,7 +179,7 @@ index 6b6d7fa..3667b8b 100644
  findpkg_finish(POCO_Net)
  
  # Look for Poco's NetSSL package
-@@ -86,7 +86,7 @@ get_debug_names(POCO_NetSSL_LIBRARY_NAMES)
+@@ -86,7 +86,7 @@
  find_path(POCO_NetSSL_INCLUDE_DIR NAMES Poco/Net/NetSSL.h HINTS ${POCO_INCLUDE_DIR} ${POCO_INC_SEARCH_PATH} ${POCO_PKGC_INCLUDE_DIRS} PATH_SUFFIXES NetSSL/include)
  find_library(POCO_NetSSL_LIBRARY_REL NAMES ${POCO_NetSSL_LIBRARY_NAMES} HINTS ${POCO_LIB_SEARCH_PATH} ${POCO_PKGC_LIBRARY_DIRS} PATH_SUFFIXES Linux/i686)
  find_library(POCO_NetSSL_LIBRARY_DBG NAMES ${POCO_NetSSL_LIBRARY_NAMES_DBG} HINTS ${POCO_LIB_SEARCH_PATH} ${POCO_PKGC_LIBRARY_DIRS} PATH_SUFFIXES Linux/i686)
@@ -146,7 +188,7 @@ index 6b6d7fa..3667b8b 100644
  findpkg_finish(POCO_NetSSL)
  
  # Look for Poco's XML package
-@@ -96,6 +96,6 @@ get_debug_names(POCO_XML_LIBRARY_NAMES)
+@@ -96,6 +96,6 @@
  find_path(POCO_XML_INCLUDE_DIR NAMES Poco/XML/XML.h HINTS ${POCO_INCLUDE_DIR} ${POCO_INC_SEARCH_PATH} ${POCO_PKGC_INCLUDE_DIRS} PATH_SUFFIXES XML/include)
  find_library(POCO_XML_LIBRARY_REL NAMES ${POCO_XML_LIBRARY_NAMES} HINTS ${POCO_LIB_SEARCH_PATH} ${POCO_PKGC_LIBRARY_DIRS} PATH_SUFFIXES Linux/i686)
  find_library(POCO_XML_LIBRARY_DBG NAMES ${POCO_XML_LIBRARY_NAMES_DBG} HINTS ${POCO_LIB_SEARCH_PATH} ${POCO_PKGC_LIBRARY_DIRS} PATH_SUFFIXES Linux/i686)
@@ -154,11 +196,10 @@ index 6b6d7fa..3667b8b 100644
 +make_library_set(POCO_XML)
  findpkg_finish(POCO_XML)
  
-diff --git a/CMake/Packages/FindTBB.cmake b/CMake/Packages/FindTBB.cmake
-index 0c48510..c121966 100644
---- a/CMake/Packages/FindTBB.cmake
-+++ b/CMake/Packages/FindTBB.cmake
-@@ -104,7 +104,7 @@ findpkg_framework(TBB)
+diff --color -Naur '--exclude=*.orig' '--exclude=*.rej' a/CMake/Packages/FindTBB.cmake b/CMake/Packages/FindTBB.cmake
+--- a/CMake/Packages/FindTBB.cmake	2022-02-28 07:18:04.000000000 +0800
++++ b/CMake/Packages/FindTBB.cmake	2022-02-28 22:15:24.467410500 +0800
+@@ -104,7 +104,7 @@
  find_path(TBB_INCLUDE_DIR NAMES tbb/tbb.h HINTS ${TBB_INC_SEARCH_PATH} ${TBB_PKGC_INCLUDE_DIRS})
  find_library(TBB_LIBRARY_REL NAMES ${TBB_LIBRARY_NAMES} HINTS ${TBB_LIB_SEARCH_PATH} ${TBB_PKGC_LIBRARY_DIRS})
  find_library(TBB_LIBRARY_DBG NAMES ${TBB_LIBRARY_NAMES_DBG} HINTS ${TBB_LIB_SEARCH_PATH} ${TBB_PKGC_LIBRARY_DIRS})
@@ -167,7 +208,7 @@ index 0c48510..c121966 100644
  
  findpkg_finish(TBB)
  
-@@ -120,7 +120,7 @@ get_debug_names(TBB_MALLOC_LIBRARY_NAMES)
+@@ -120,7 +120,7 @@
  find_path(TBB_MALLOC_INCLUDE_DIR NAMES tbb/tbb.h HINTS ${TBB_INCLUDE_DIR} ${TBB_INC_SEARCH_PATH} ${TBB_PKGC_INCLUDE_DIRS} )
  find_library(TBB_MALLOC_LIBRARY_REL NAMES ${TBB_MALLOC_LIBRARY_NAMES} HINTS ${TBB_LIB_SEARCH_PATH} ${TBB_PKGC_LIBRARY_DIRS} )
  find_library(TBB_MALLOC_LIBRARY_DBG NAMES ${TBB_MALLOC_LIBRARY_NAMES_DBG} HINTS ${TBB_LIB_SEARCH_PATH} ${TBB_PKGC_LIBRARY_DIRS} )
@@ -176,18 +217,29 @@ index 0c48510..c121966 100644
  findpkg_finish(TBB_MALLOC)
  
  # Look for TBB's malloc proxy package
-@@ -130,5 +130,5 @@ get_debug_names(TBB_MALLOC_PROXY_LIBRARY_NAMES)
+@@ -130,5 +130,5 @@
  find_path(TBB_MALLOC_PROXY_INCLUDE_DIR NAMES tbb/tbbmalloc_proxy.h HINTS ${TBB_INCLUDE_DIR} ${TBB_INC_SEARCH_PATH} ${TBB_PKGC_INCLUDE_DIRS})
  find_library(TBB_MALLOC_PROXY_LIBRARY_REL NAMES ${TBB_MALLOC_PROXY_LIBRARY_NAMES} HINTS ${TBB_LIB_SEARCH_PATH} ${TBB_PKGC_LIBRARY_DIRS})
  find_library(TBB_MALLOC_PROXY_LIBRARY_DBG NAMES ${TBB_MALLOC_PROXY_LIBRARY_NAMES_DBG} HINTS ${TBB_LIB_SEARCH_PATH} ${TBB_PKGC_LIBRARY_DIRS})
 -make_library_set(TBB_MALLOC_PROXY_LIBRARY)
 +make_library_set(TBB_MALLOC_PROXY)
  findpkg_finish(TBB_MALLOC_PROXY)
-diff --git a/CMake/Packages/FindZZip.cmake b/CMake/Packages/FindZZip.cmake
-index e97951e..54c2567 100644
---- a/CMake/Packages/FindZZip.cmake
-+++ b/CMake/Packages/FindZZip.cmake
-@@ -39,12 +39,12 @@ use_pkgconfig(ZZip_PKGC zziplib)
+diff --color -Naur '--exclude=*.orig' '--exclude=*.rej' a/CMake/Packages/FindZLIB.cmake b/CMake/Packages/FindZLIB.cmake
+--- a/CMake/Packages/FindZLIB.cmake	2022-02-28 07:18:04.000000000 +0800
++++ b/CMake/Packages/FindZLIB.cmake	2022-02-28 22:15:24.576409600 +0800
+@@ -41,7 +41,7 @@
+ find_path(ZLIB_INCLUDE_DIR NAMES zlib.h HINTS ${ZLIB_INC_SEARCH_PATH} ${ZLIB_PKGC_INCLUDE_DIRS})
+ find_library(ZLIB_LIBRARY_REL NAMES ${ZLIB_LIBRARY_NAMES} HINTS ${ZLIB_LIB_SEARCH_PATH} ${ZLIB_PKGC_LIBRARY_DIRS} PATH_SUFFIXES "" Release RelWithDebInfo MinSizeRel)
+ find_library(ZLIB_LIBRARY_DBG NAMES ${ZLIB_LIBRARY_NAMES_DBG} HINTS ${ZLIB_LIB_SEARCH_PATH} ${ZLIB_PKGC_LIBRARY_DIRS} PATH_SUFFIXES "" Debug)
+-make_library_set(ZLIB_LIBRARY)
++make_library_set(ZLIB)
+ 
+ findpkg_finish(ZLIB)
+ 
+diff --color -Naur '--exclude=*.orig' '--exclude=*.rej' a/CMake/Packages/FindZZip.cmake b/CMake/Packages/FindZZip.cmake
+--- a/CMake/Packages/FindZZip.cmake	2022-02-28 07:18:04.000000000 +0800
++++ b/CMake/Packages/FindZZip.cmake	2022-02-28 22:15:24.478410400 +0800
+@@ -39,12 +39,12 @@
  
  findpkg_framework(ZZip)
  
@@ -202,11 +254,10 @@ index e97951e..54c2567 100644
  
  findpkg_finish(ZZip)
  
-diff --git a/CMake/Utils/FindPkgMacros.cmake b/CMake/Utils/FindPkgMacros.cmake
-index 374f84b..dc7066d 100644
---- a/CMake/Utils/FindPkgMacros.cmake
-+++ b/CMake/Utils/FindPkgMacros.cmake
-@@ -79,15 +79,21 @@ endmacro (use_pkgconfig)
+diff --color -Naur '--exclude=*.orig' '--exclude=*.rej' a/CMake/Utils/FindPkgMacros.cmake b/CMake/Utils/FindPkgMacros.cmake
+--- a/CMake/Utils/FindPkgMacros.cmake	2022-02-28 07:18:04.000000000 +0800
++++ b/CMake/Utils/FindPkgMacros.cmake	2022-02-28 22:15:24.493411700 +0800
+@@ -79,15 +79,21 @@
  
  # Couple a set of release AND debug libraries (or frameworks)
  macro(make_library_set PREFIX)
@@ -237,55 +288,27 @@ index 374f84b..dc7066d 100644
  endmacro(make_library_set)
  
  # Generate debug names from given release names
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 3e09d2d..58968f0 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -274,7 +274,7 @@ elseif(EMSCRIPTEN)
- elseif (APPLE AND NOT APPLE_IOS)
- 
-   set(XCODE_ATTRIBUTE_SDKROOT macosx)
+diff --color -Naur '--exclude=*.orig' '--exclude=*.rej' a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt	2022-02-28 07:18:04.000000000 +0800
++++ b/CMakeLists.txt	2022-02-28 22:15:24.514410800 +0800
+@@ -308,7 +308,7 @@
+ if (OGRE_BUILD_PLATFORM_APPLE_IOS)
+   # Set build variables
+   set(XCODE_ATTRIBUTE_SDKROOT iphoneos)
 -  if(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
 +  if(1)
      execute_process(COMMAND xcodebuild -version -sdk "${XCODE_ATTRIBUTE_SDKROOT}" Path | head -n 1 OUTPUT_VARIABLE CMAKE_OSX_SYSROOT)
      string(REGEX REPLACE "(\r?\n)+$" "" CMAKE_OSX_SYSROOT "${CMAKE_OSX_SYSROOT}")
    else()
-diff --git a/Components/Overlay/CMakeLists.txt b/Components/Overlay/CMakeLists.txt
-index bdb303d..d9cc221 100644
---- a/Components/Overlay/CMakeLists.txt
-+++ b/Components/Overlay/CMakeLists.txt
-@@ -21,7 +21,7 @@ file(GLOB SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
- # setup target
- add_library(OgreOverlay ${OGRE_COMP_LIB_TYPE} ${HEADER_FILES} ${SOURCE_FILES} ${PLATFORM_HEADER_FILES} ${PLATFORM_SOURCE_FILES})
- set_target_properties(OgreOverlay PROPERTIES VERSION ${OGRE_SOVERSION} SOVERSION ${OGRE_SOVERSION})
--target_link_libraries(OgreOverlay PUBLIC OgreMain PRIVATE "${FREETYPE_LIBRARIES}" ZLIB::ZLIB)
-+target_link_libraries(OgreOverlay PUBLIC OgreMain PRIVATE ${FREETYPE_LIBRARIES} ZLIB::ZLIB)
- target_include_directories(OgreOverlay PUBLIC 
-   "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-   $<INSTALL_INTERFACE:include/OGRE/Overlay>
-diff --git a/OgreMain/CMakeLists.txt b/OgreMain/CMakeLists.txt
-index 6ec4e34..cc9cb9d 100644
---- a/OgreMain/CMakeLists.txt
-+++ b/OgreMain/CMakeLists.txt
-@@ -225,8 +225,6 @@ if (APPLE)
+diff --color -Naur '--exclude=*.orig' '--exclude=*.rej' a/OgreMain/CMakeLists.txt b/OgreMain/CMakeLists.txt
+--- a/OgreMain/CMakeLists.txt	2022-02-28 07:18:04.000000000 +0800
++++ b/OgreMain/CMakeLists.txt	2022-02-28 22:15:24.543411300 +0800
+@@ -420,8 +420,6 @@
      set_target_properties(OgreMain PROPERTIES
          LINK_FLAGS "-framework IOKit -framework Cocoa -framework Carbon -framework OpenGL -framework CoreVideo"
      )
 -
 -    set(OGRE_OSX_BUILD_CONFIGURATION "$(PLATFORM_NAME)/$(CONFIGURATION)")
    
-     if(OGRE_BUILD_LIBS_AS_FRAMEWORKS)
-       add_custom_command(TARGET OgreMain POST_BUILD
-diff --git a/PlugIns/EXRCodec/CMakeLists.txt b/PlugIns/EXRCodec/CMakeLists.txt
-index e9c936a..bb8747e 100644
---- a/PlugIns/EXRCodec/CMakeLists.txt
-+++ b/PlugIns/EXRCodec/CMakeLists.txt
-@@ -16,7 +16,7 @@ target_link_libraries(Codec_EXR OgreMain ${OPENEXR_LIBRARIES})
- target_include_directories(Codec_EXR PUBLIC 
-     "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-     $<INSTALL_INTERFACE:include/OGRE/Plugins/EXRCodec>)
--target_include_directories(Codec_EXR SYSTEM PRIVATE  "${OPENEXR_INCLUDE_DIR}/OpenEXR")
-+target_include_directories(Codec_EXR SYSTEM PRIVATE  "${OPENEXR_INCLUDE_DIR}")
- 
- ogre_config_framework(Codec_EXR)
- ogre_config_plugin(Codec_EXR)
+   	add_custom_command(TARGET OgreMain POST_BUILD
+ 		COMMAND mkdir ARGS -p ${OGRE_BINARY_DIR}/lib/${OGRE_OSX_BUILD_CONFIGURATION}/Ogre.framework/Headers/Threading
