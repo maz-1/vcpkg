@@ -16,10 +16,11 @@ vcpkg_from_github(
         fix-pkgconfig.patch # Remove this patch in the next update
         fix-namespace-cub.patch # Remove this patch in the next update
         fix-error-C3052.patch # Remove this patch in the next update
+        fix_qmatrix_conflict.patch # Remove this patch in the next update
         fix-find-libusb.patch
         install-examples.patch
         no-absolute.patch
-        Workaround-ICE-in-release.patch
+        fix_msvc2022_bug.patch
 )
 
 file(REMOVE "${SOURCE_PATH}/cmake/Modules/FindQhull.cmake"

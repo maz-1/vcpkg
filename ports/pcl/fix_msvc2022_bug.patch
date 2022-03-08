@@ -1,0 +1,38 @@
+diff --git a/src/other/openNURBS/opennurbs_lookup.cpp b/src/other/openNURBS/opennurbs_lookup.cpp
+index efa3b016911..ce6a3e495e7 100644
+--- a/surface/src/3rdparty/opennurbs/opennurbs_lookup.cpp
++++ b/surface/src/3rdparty/opennurbs/opennurbs_lookup.cpp
+@@ -666,6 +666,7 @@ size_t ON_SerialNumberMap::ActiveIdCount() const
+   return m_active_id_count;
+ }
+ 
++#if 0
+ struct ON_SerialNumberMap::SN_ELEMENT* ON_SerialNumberMap::FirstElement() const
+ {
+   struct SN_ELEMENT* e=0;
+@@ -717,6 +718,7 @@ struct ON_SerialNumberMap::SN_ELEMENT* ON_SerialNumberMap::FirstElement() const
+   }
+   return e;
+ }
++#endif
+ 
+ struct ON_SerialNumberMap::SN_ELEMENT* ON_SerialNumberMap::LastElement() const
+ {
+diff --git a/src/other/openNURBS/opennurbs_lookup.h b/src/other/openNURBS/opennurbs_lookup.h
+index 6580766c31c..2ef5ce3bef1 100644
+--- a/surface/include/pcl/surface/3rdparty/opennurbs/opennurbs_lookup.h
++++ b/surface/include/pcl/surface/3rdparty/opennurbs/opennurbs_lookup.h
+@@ -116,8 +116,12 @@ class ON_CLASS ON_SerialNumberMap
+     field.  You must NEVER change any other SN_ELEMENT
+     fields or you will break searching and possibly cause
+     crashes.
++
++    NOTE - currently disabled due to compiler bug in VS2022 - see
++    https://discourse.mcneel.com/t/building-opennurbs-public-with-visualstudio2022-results-in-compiler-error/137817
++    https://github.com/microsoft/vcpkg/issues/19561
+   */
+-  struct SN_ELEMENT* FirstElement() const;
++  //struct SN_ELEMENT* FirstElement() const;
+ 
+   /*
+   Returns:
