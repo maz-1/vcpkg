@@ -1,0 +1,15 @@
+diff --color -Naur a/OgreMain/src/OgreHlms.cpp b/OgreMain/src/OgreHlms.cpp
+--- a/OgreMain/src/OgreHlms.cpp	2021-08-16 07:02:59.000000000 +0800
++++ b/OgreMain/src/OgreHlms.cpp	2021-09-12 13:54:23.888984400 +0800
+@@ -278,11 +278,7 @@
+         mShaderProfile( "unset!" ),
+         mShaderSyntax( "unset!" ),
+         mShaderFileExt( "unset!" ),
+-#if OGRE_DEBUG_MODE >= OGRE_DEBUG_MEDIUM
+         mDebugOutput( true ),
+-#else
+-        mDebugOutput( false ),
+-#endif
+ #if OGRE_DEBUG_MODE >= OGRE_DEBUG_HIGH
+         mDebugOutputProperties( true ),
+ #else

@@ -1,0 +1,45 @@
+diff --color -Naur a/Components/Hlms/Unlit/include/OgreHlmsUnlit.h b/Components/Hlms/Unlit/include/OgreHlmsUnlit.h
+--- a/Components/Hlms/Unlit/include/OgreHlmsUnlit.h	2021-09-13 11:32:05.044330000 +0800
++++ b/Components/Hlms/Unlit/include/OgreHlmsUnlit.h	2021-09-13 11:42:31.452233400 +0800
+@@ -114,6 +114,9 @@
+                                            bool casterPass, uint32 lastCacheHash,
+                                            CommandBuffer *commandBuffer, bool isV1 );
+ 
++        HlmsUnlit( Archive *dataFolder, ArchiveVec *libraryFolders, size_t constBufferSize );
++        HlmsUnlit( Archive *dataFolder, ArchiveVec *libraryFolders,
++                   HlmsTypes type, const String &typeName, size_t constBufferSize );
+     public:
+         HlmsUnlit( Archive *dataFolder, ArchiveVec *libraryFolders );
+         HlmsUnlit( Archive *dataFolder, ArchiveVec *libraryFolders,
+diff --color -Naur a/Components/Hlms/Unlit/src/OgreHlmsUnlit.cpp b/Components/Hlms/Unlit/src/OgreHlmsUnlit.cpp
+--- a/Components/Hlms/Unlit/src/OgreHlmsUnlit.cpp	2021-08-16 07:02:59.000000000 +0800
++++ b/Components/Hlms/Unlit/src/OgreHlmsUnlit.cpp	2021-09-13 11:36:29.991879400 +0800
+@@ -71,10 +71,14 @@
+ {
+ 
+     extern const String c_unlitBlendModes[];
++    
++    HlmsUnlit::HlmsUnlit( Archive *dataFolder, ArchiveVec *libraryFolders ) : HlmsUnlit(dataFolder, libraryFolders, HlmsUnlitDatablock::MaterialSizeInGpuAligned){}
++    HlmsUnlit::HlmsUnlit( Archive *dataFolder, ArchiveVec *libraryFolders,
++                          HlmsTypes type, const String &typeName ) : HlmsUnlit(dataFolder, libraryFolders, type, typeName, HlmsUnlitDatablock::MaterialSizeInGpuAligned){}
+ 
+-    HlmsUnlit::HlmsUnlit( Archive *dataFolder, ArchiveVec *libraryFolders ) :
++    HlmsUnlit::HlmsUnlit( Archive *dataFolder, ArchiveVec *libraryFolders, size_t constBufferSize ) :
+         HlmsBufferManager( HLMS_UNLIT, "unlit", dataFolder, libraryFolders ),
+-        ConstBufferPool( HlmsUnlitDatablock::MaterialSizeInGpuAligned,
++        ConstBufferPool( constBufferSize,
+                          ExtraBufferParams( 64 * NUM_UNLIT_TEXTURE_TYPES ) ),
+         mCurrentPassBuffer( 0 ),
+         mLastBoundPool( 0 ),
+@@ -98,9 +102,9 @@
+         mPreparedPass.viewProjMatrix[4] = Matrix4::IDENTITY;
+     }
+     HlmsUnlit::HlmsUnlit( Archive *dataFolder, ArchiveVec *libraryFolders,
+-                          HlmsTypes type, const String &typeName ) :
++                          HlmsTypes type, const String &typeName, size_t constBufferSize ) :
+         HlmsBufferManager( type, typeName, dataFolder, libraryFolders ),
+-        ConstBufferPool( HlmsUnlitDatablock::MaterialSizeInGpuAligned,
++        ConstBufferPool( constBufferSize,
+                          ExtraBufferParams( 64 * NUM_UNLIT_TEXTURE_TYPES ) ),
+         mCurrentPassBuffer( 0 ),
+         mLastBoundPool( 0 ),

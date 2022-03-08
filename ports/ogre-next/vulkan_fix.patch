@@ -1,0 +1,19 @@
+diff -Naur a/RenderSystems/Vulkan/src/OgreVulkanProgram.cpp b/RenderSystems/Vulkan/src/OgreVulkanProgram.cpp
+--- a/CMake/Packages/FindVulkan.cmake	2021-08-16 07:02:59.000000000 +0800
++++ b/CMake/Packages/FindVulkan.cmake	2021-08-18 15:17:08.073735100 +0800
+@@ -88,10 +88,14 @@
+ 		PATH_SUFFIXES "" Release RelWithDebInfo MinSizeRel
+ 		)
+ 	find_library(Vulkan_SHADERC_LIB_DBG
+-		NAMES shaderc_combined
++		NAMES shaderc_combinedd
+ 		HINTS
+ 			"${OGRE_DEPENDENCIES_DIR}/lib" "${ENV_OGRE_DEPENDENCIES_DIR}/lib"
+ 			"${OGRE_SOURCE}/Dependencies/lib"
++			"${OGRE_VULKAN_SDK}/Debug/${VK_LIB}"
++			"${OGRE_VULKAN_SDK}/Debug/${VK_BIN}"
++			"$ENV{VULKAN_SDK}/Debug/${VK_LIB}"
++			"$ENV{VULKAN_SDK}/Debug/${VK_BIN}"
+ 		PATH_SUFFIXES "" Debug
+ 		)
+ 	find_program(Vulkan_GLSLC_EXECUTABLE
