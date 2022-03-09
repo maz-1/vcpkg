@@ -1,0 +1,25 @@
+diff -Naur a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt	2021-04-23 13:46:38.000000000 +0800
++++ b/CMakeLists.txt	2022-03-08 10:00:07.556272500 +0800
+@@ -7,8 +7,8 @@
+ option(BUILD_TESTS "build tests" ON)
+ 
+ # find qt package
+-find_package(Qt6 COMPONENTS Core REQUIRED)
++find_package(Qt5 COMPONENTS Core REQUIRED)
+-set(QT_CORE_TARGET Qt6::Core)
++set(QT_CORE_TARGET Qt5::Core)
+ 
+ # instruct CMake to run moc automatically when needed.
+ set(CMAKE_AUTOMOC ON)
+--- a/tests/CMakeLists.txt	2021-04-23 13:46:38.000000000 +0800
++++ b/tests/CMakeLists.txt	2022-03-08 10:03:25.104463900 +0800
+@@ -1,6 +1,6 @@
+ 
+-find_package(Qt6 COMPONENTS Test REQUIRED)
+-set(QT_TEST_TARGET Qt6::Test)
++find_package(Qt5 COMPONENTS Test REQUIRED)
++set(QT_TEST_TARGET Qt5::Test)
+ 
+ # define names
+ set(BINARY_NAME qtcsv_tests)

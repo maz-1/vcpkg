@@ -1,0 +1,12 @@
+diff -Naur a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt	2021-04-19 16:18:03.000000000 +0800
++++ b/CMakeLists.txt	2022-03-08 10:15:10.941331900 +0800
+@@ -68,7 +68,7 @@
+ install(DIRECTORY include DESTINATION .)
+ 
+ # create and install cmake package files
+-install(EXPORT ${PROJECT_NAME}Config DESTINATION share/${PROJECT_NAME}/cmake)
++install(EXPORT ${PROJECT_NAME}Config DESTINATION share/${PROJECT_NAME})
+ export(TARGETS ${PROJECT_NAME} FILE ${PROJECT_NAME}Config.cmake)
+ 
+ if(BUILD_TESTS)
