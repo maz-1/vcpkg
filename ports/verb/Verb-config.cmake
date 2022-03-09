@@ -86,7 +86,7 @@ ELSE(Verb_LIBRARY)
 ENDIF(Verb_LIBRARY)
 
 IF (Verb_FOUND)
-    SET(Verb_INCLUDE_DIRS ${Verb_INCLUDE_DIR} ${Verb_INCLUDE_DIR}/hxcpp CACHE FILEPATH "Verb include directory")
+    SET(Verb_INCLUDE_DIRS ${Verb_INCLUDE_DIR} ${Verb_INCLUDE_DIR}/hxcpp)
 ENDIF()
 
 
