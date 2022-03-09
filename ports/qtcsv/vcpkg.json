@@ -1,0 +1,10 @@
+{
+  "name": "qtcsv",
+  "version-semver": "1.6.0",
+  "description": "Small easy-to-use library for reading and writing csv-files in Qt.",
+  "homepage": "https://github.com/iamantony/qtcsv",
+  "supports": "windows",
+  "dependencies": [
+    "qt5"
+  ]
+}
