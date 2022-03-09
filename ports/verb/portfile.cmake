@@ -23,7 +23,9 @@ find_program(NEKO_COMMAND neko
                    /usr/local/bin
              REQUIRED)
 get_filename_component(HAXE_CMD_DIR ${HAXE_COMMAND} DIRECTORY)
+file(TO_NATIVE_PATH "${HAXE_CMD_DIR}" HAXE_CMD_DIR_NATIVE)
 get_filename_component(NEKO_CMD_DIR ${NEKO_COMMAND} DIRECTORY)
+file(TO_NATIVE_PATH "${NEKO_CMD_DIR}" NEKO_CMD_DIR_NATIVE)
 
 set(HAXE_BUILDFILE_CONTENT "-lib promhx \n\
 -main verb.Verb \n\
@@ -71,9 +73,9 @@ if (VCPKG_TARGET_IS_UWP OR VCPKG_TARGET_IS_WINDOWS)
 -cpp ${CURRENT_BUILDTREES_DIR}/${TARGET_TRIPLET}-dbg")
 endif()
 
-set(ENV{PATH} "${HAXE_CMD_DIR}${PATH_SEP}${NEKO_CMD_DIR}${PATH_SEP}$ENV{PATH}")
+set(ENV{PATH} "${HAXE_CMD_DIR_NATIVE}${PATH_SEP}${NEKO_CMD_DIR_NATIVE}${PATH_SEP}$ENV{PATH}")
 set(ENV{HAXEPATH} "${SOURCE_PATH}/deps")
-#set(ENV{NEKO_INSTPATH} "${NEKO_CMD_DIR}")
+set(ENV{NEKO_INSTPATH} "${NEKO_CMD_DIR_NATIVE}")
 execute_process(COMMAND haxelib install hxcpp
                 WORKING_DIRECTORY "${SOURCE_PATH}")
 execute_process(COMMAND haxelib install promhx
