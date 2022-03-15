@@ -14,6 +14,7 @@
 #include <hxcpp.h>
 #endif
 
+#include <iostream>
 
 static inline int HaxeInitGC()
 {
@@ -35,3 +36,25 @@ static inline int HaxeInitGC()
     }
     return 0;
 }
+
+
+template <class T>
+void HaxeAssignArray(int idx, Array<T>& arr)
+{
+}
+template <class T, class ...Args>
+void HaxeAssignArray(int idx, Array<T>& arr, T head, Args... rest)
+{
+    arr[idx] = head;
+    HaxeAssignArray<T>(idx+1, arr, rest...);
+}
+template <class T, class ...Args>
+Array<T> HaxeCreateArray(T head, Args... rest)
+{
+    int n = sizeof...(rest)+1;
+    Array<T> arr(n, n);
+    arr[0] = head;
+    HaxeAssignArray<T>(1, arr, rest...);
+    return arr;
+}
+
